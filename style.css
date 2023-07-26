@@ -16,6 +16,7 @@ body {
   justify-content: center;
 }
 .carousel {
+  border-radius: 10px;
   overflow: hidden;
   max-width: 600px;
   position: relative;
@@ -27,6 +28,7 @@ body {
 }
 
 .carousel .carousel__item img {
+  border-radius: 10px;
   width: 100%;
   max-width: 600px;
   height: auto;

@@ -1,52 +1,38 @@
+const slides = document.querySelectorAll('[data-js = carousel__item]');
+const next = document.querySelector('[data-js = carousel__button--next]')
+const previous = document.querySelector('[data-js = carousel__button--prev]')
+const img = document.querySelectorAll('img')
 
-const carousel = document.querySelector('.carousel')
-const next = document.querySelector("[data-js ='carousel__button--next']")
-const previous = document.querySelector("[data-js ='carousel__button--prev']")
 
-let acc = 0;
+const lastItem = slides.length - 1
+let currentSlideIndex = 0;
 
-const increaseAccumulatorValue = (acc, imageAmount) => {
-  acc < imageAmount ? acc++ : acc = 0;
-  return acc
+
+const manipulateSlidesClasses = (currentSlideIndex) => {
+    slides.forEach((slide) => slide.classList.remove('carousel__item--visible'))
+    slides[currentSlideIndex].classList.add('carousel__item--visible')
 }
 
-const decreaseAccumulatorValue = (acc, imageAmount) => {
-  acc--
-  acc < 0 ? acc = imageAmount : acc;
-  return acc
-}
-
-const showImage = (getImages, acc) => {
-  getImages.forEach((images, index) => {
-
-    images.classList.add(`${index}`)
-    images.classList.remove('carousel__item--visible')
-
-    if (images.classList.contains(acc)) {
-      images.classList.add('carousel__item--visible')
-    }
-
-  })
-}
 
 next.addEventListener('click', () => {
-  const getImages = document.querySelectorAll('.carousel__item');
-  const imageAmount = getImages.length - 1;
+    currentSlideIndex++
 
-  acc = increaseAccumulatorValue(acc, imageAmount)
-  showImage(getImages, acc)
+    currentSlideIndex < slides.length ?
+        currentSlideIndex
+        : currentSlideIndex = 0;
+
+    manipulateSlidesClasses(currentSlideIndex)
 })
 
 
 previous.addEventListener('click', () => {
-  const getImages = document.querySelectorAll('.carousel__item')
-  const imageAmount = getImages.length - 1;
+    currentSlideIndex--
 
-  acc = decreaseAccumulatorValue(acc, imageAmount)
-  showImage(getImages, acc)
+    currentSlideIndex < 0 ?
+        currentSlideIndex = lastItem
+        : currentSlideIndex
+
+
+    manipulateSlidesClasses(currentSlideIndex)
 })
-
-
-
-
 
